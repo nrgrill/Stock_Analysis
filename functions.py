@@ -4,6 +4,6 @@ def timer(func):
         start = time()
         result = func(*args, **kwargs)
         end = time()
-        print(f'Function {func.__name__!r} executed in {(end-start):.4f}s')
+        print(f'Function {func.__name__!r} executed in {(end-start):.2f}s')
         return result
     return time_func

@@ -1,0 +1,9 @@
+Start
+# of estimators: 100
+Minimum samples: 20
+Start: 4675
+Step: 935
+Model is 61.11% precise
+
+
+
