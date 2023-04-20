@@ -12,11 +12,19 @@ stock_name = "MSFT"
 outFile = open(stock_name + ".txt", 'w')
 if stock_name == "":
     stock_name = input("Enter stock to graph: ")
-stock = yf.Ticker(stock_name)
 
-#Get entire history of stock
-stock_hist = stock.history(period="max")
-num_days = len(stock_hist)
+DATA_PATH = "data/" + stock_name.lower() + "_data.json"
+
+if os.path.exists(DATA_PATH):
+    # Read from file if we've already downloaded the data.
+    with open(DATA_PATH) as f:
+        stock_hist = pd.read_json(DATA_PATH)
+else:
+    stock = yf.Ticker(stock_name)
+    #Get entire history of stock
+    stock_hist = stock.history(period="max")
+    # Save file to json in case we need it later.  This prevents us from having to re-download it every time.
+    stock_hist.to_json(DATA_PATH)
 
 #Plot closing price vs. time
 plt.plot(stock_hist["Close"])
